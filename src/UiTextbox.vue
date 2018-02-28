@@ -8,6 +8,14 @@
 
         <div class="ui-textbox__content">
             <label class="ui-textbox__label">
+                <div
+                    class="ui-textbox__label-text"
+                    :class="labelClasses"
+                    v-if="label || $slots.default"
+                >
+                    <slot>{{ label }}</slot>
+                </div>
+
                 <input
                     class="ui-textbox__input"
                     ref="input"
@@ -60,15 +68,7 @@
 
                     v-autofocus="autofocus"
                     v-else
-                >{{ value }}</textarea>
-
-                <div
-                    class="ui-textbox__label-text"
-                    :class="labelClasses"
-                    v-if="label || $slots.default"
-                >
-                    <slot>{{ label }}</slot>
-                </div>
+                ></textarea>
             </label>
 
             <div class="ui-textbox__feedback" v-if="hasFeedback || maxlength">
@@ -395,15 +395,6 @@ export default {
                 transform: translateY(0) scale(1);
             }
         }
-
-        // Fixes glitch in chrome where label and input value overlap each other
-        // when webkit-autofill value has not been propagated yet (e.g. https://github.com/vuejs/vue/issues/1331)
-        // The webkit-autofill value will only be propagated on first click into the viewport.
-        // Before that .is-inline will be wrongly set and cause the auto filled input value and the label to overlap.
-        // This fix will style the wrong .is-inline like an .is-floating in case :-webkit-autofill is set.
-        .ui-textbox__label > input:-webkit-autofill + .ui-textbox__label-text.is-inline {
-            transform: translateY(0) scale(1);
-        }
     }
 
     &.is-invalid:not(.is-disabled) {
@@ -442,8 +433,7 @@ export default {
 }
 
 .ui-textbox__label {
-    display: flex;
-    flex-direction: column-reverse;
+    display: block;
     margin: 0;
     padding: 0;
     width: 100%;
