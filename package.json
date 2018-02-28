@@ -1,6 +1,6 @@
 {
   "name": "keen-ui",
-  "version": "1.0.1.2",
+  "version": "1.0.1.3",
   "description": "A lightweight collection of essential UI components written with Vue and inspired by Material Design.",
   "main": "dist/keen-ui.js",
   "scripts": {
@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/JosephusPaye/Keen-UI.git"
+    "url": "https://github.com/DocCom/Keen-UI.git"
   },
   "keywords": [
     "vue",
